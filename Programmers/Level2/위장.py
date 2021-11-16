@@ -1,20 +1,17 @@
-# # hash
-# from collections import defaultdict
-# from itertools import combinations, permutations
+# hash
+from collections import defaultdict
+from itertools import combinations
 
-# def solution(clothes):
-#     answer = 0
-#     clothes_dict = defaultdict(list)
-#     p = []
-#     c = []
-    
-#     for i in clothes:
-#         clothes_dict[i[1]].append(i[0])
-    
-#     for i in clothes_dict.values():
-#         p.append(i)
-#     print(p)
+def solution(clothes):
+    dict = defaultdict(list)
+    for i in clothes:
+        dict[i[1]].append(i[0])
 
-#     return answer
+    comb=1
+    for i in list(dict.keys()):
+        comb*=(len(dict[i])+1)
 
-# solution([["yellowhat", "headgear"], ["bluesunglasses", "eyewear"], ["green_turban", "headgear"]])
+    return comb-1
+
+print(solution([["yellowhat", "headgear"], ["bluesunglasses", "eyewear"], ["green_turban", "headgear"]]))
+print(solution([["crowmask", "face"], ["bluesunglasses", "face"], ["smoky_makeup", "face"]]))
