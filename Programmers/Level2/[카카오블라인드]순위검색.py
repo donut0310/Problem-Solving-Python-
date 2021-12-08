@@ -1,66 +1,48 @@
+from collections import defaultdict
+from itertools import combinations
 import re
-def search(subj,q):
-    print(subj,'\n',q)
-    answer =0 
-    for i in subj:
-        cnt=0
-        for j,jv in enumerate(q):
-            if jv=='-':
-                cnt+=1
-                continue
-            elif j!=4:
-                if jv!=i[j]:
-                    break
-                else:
-                    cnt+=1 
-            elif j==4 and jv<i[j]:
-                cnt+=1
-        if cnt==5:
-            answer+=1
-    return answer
+
+def binary_search(scores,target):
+    low,high = 0,len(scores)
+    while low<high:
+        mid = (low+high)//2
+        if scores[mid]>=target:
+            high=mid
+        else:
+            low=mid+1
+    return low
 
 def solution(info,query):
-    answer,qarr,cpp,java,python = [],[],[],[],[]
-    sumarr=[]
-
-    [qarr.append(re.sub(r' and ',' ',i).split(' ')) for i in query]
-    sumarr.extend(cpp)
-    sumarr.extend(java)
-    sumarr.extend(python)
+    answer=[]
+    dict=defaultdict(list)
+    # 점수를 제외한 필드의 모든 경우의 수를 구한후 string으로 합쳐서 key로 저장
+    # 점수는 해당 key에 value로 저장
     for i in info:
-        subj = i.split(' ')
-        if subj[0]=='cpp':
-            cpp.append(subj)
-        elif subj[0]=='java':
-            java.append(subj)
-        elif subj[0]=='python':
-            python.append(subj)
+        i=i.split(' ')
+        key=i[:-1]
+        value=int(i[-1])
+        for n in range(5):
+            for c in combinations(key,n):
+                tmp_key=''.join(c)
+                dict[tmp_key].append(value)
 
-    for q in qarr:
-        subj = q[0]
-        a=0
-        if subj=='cpp':
-            a=search(cpp,q)
-        elif subj=='java':
-            a=search(java,q)
-        elif subj=='python':
-            a=search(python,q)
-        elif subj=='-':
-            a=search(sumarr,q)
-        answer.append(a)
-    print(answer)
-    return  answer
+    for key in dict.keys():
+        dict[key].sort()        
 
-solution(["java backend junior pizza 150",
-"python frontend senior chicken 210",
-"python frontend senior chicken 150",
-"cpp backend senior pizza 260",
-"java backend junior chicken 80",
-"python backend senior chicken 50"],
-["java and backend and junior and pizza 100",
-"python and frontend and senior and chicken 200",
-"cpp and - and senior and pizza 250",
-"- and backend and senior and - 150",
-"- and - and - and chicken 100",
-"- and - and - and - 150"]
-)
+    for q in query:
+        q=re.sub(r' and ',' ',q).split(' ')
+        target=int(q[-1])
+        q=q[:-1]
+
+        while '-' in q:
+            q.remove('-')
+        tmp=''.join(q)
+        if tmp in dict:
+            scores = dict[tmp]
+            if len(scores)>0:
+                answer.append(len(scores)-binary_search(scores,target))
+        else: answer.append(0)
+    return answer
+
+print(solution(["java backend junior pizza 150","python frontend senior chicken 210","python frontend senior chicken 150","cpp backend senior pizza 260","java backend junior chicken 80","python backend senior chicken 50"],["java and backend and junior and pizza 100","python and frontend and senior and chicken 200","cpp and - and senior and pizza 250","- and backend and senior and - 150","- and - and - and chicken 100","- and - and - and - 150"]))
+print(solution(["java backend junior pizza 150"],["java and backend and junior and pizza 100","python and frontend and senior and chicken 200","cpp and - and senior and pizza 250","- and backend and senior and - 150","- and - and - and chicken 100","- and - and - and - 150"]))
