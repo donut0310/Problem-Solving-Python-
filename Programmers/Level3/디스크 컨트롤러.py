@@ -19,7 +19,7 @@ def solution(jobs):
         while jobs:
             if jobs[0][0]<=cur: # 현재 시간 이전에 대기중인 작업들 큐에 삽입
                 heapq.heappush(heap,(jobs[0][1],jobs.pop(0)))
-            else: # 현재 시간 이전에 대기중인 작업이 없고 큐가 비어 있는 경우
+            else: # 현재 시간 이전에 대기중인 작업이 없고 큐가 비어 있는 경우, 다음 작업 하나를 바로 가져온다.
                 if len(heap)==0:
                     cur=(jobs[0][0])   
                     heapq.heappush(heap,(jobs[0][1],jobs.pop(0)))
