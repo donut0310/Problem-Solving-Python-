@@ -66,4 +66,9 @@ def solution(places):
 # print(solution([['PXXXX','XPPXX','XXXXX','XXXXX','XXXXX','XXXXX']])) #[0]
 # print(solution([['PXXXX','XPOXX','XXPXX','XXXXX','XXXXX']])) #[0]
 # print(solution([['OPXXX','PXXXX','XXXXX','XXXXX','XXXXX']])) #[0]
-print(solution([["OOPOO", "OPOOO", "OOOOO", "OOOOO", "OOOOO"]] )) #[0]
+# print(solution([["OOPOO", "OPOOO", "OOOOO", "OOOOO", "OOOOO"]] )) #[0]
+
+# 대각선과 직선상에 응시자가 존재하는 경우를 나눠서 탐색
+# 대각선인 경우 p1,p2의 위치별로 남은 대각정보를 구해서 탐색
+# 직선상인 경우 한칸 띄어 앉은 경우 띄어앉은 자리가 파티션인지 빈 테이블인지 여부 확인
+# 직선상인 경우 붙어 앉은 경우에 대해서 거리두기 실패 정보 삽입
