@@ -1,5 +1,3 @@
-import re
-
 def solution(s):
     answer,arr=[],[]
     s=s[2:-2].split('},{') #문자열 s 분리
