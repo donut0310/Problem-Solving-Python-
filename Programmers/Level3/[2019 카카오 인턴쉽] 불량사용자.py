@@ -18,7 +18,7 @@ def solution(user_id, banned_id):
                 candidates.add(target)
     p = list(permutations(list(candidates),len(banned_id))) # 후보군 순열 
 
-    check_dict = defaultdict(int) # 불량 사용자 아이디의 포매소가 일치하는 후보군 리스트를 키로 가지는 dict
+    check_dict = defaultdict(int) # 불량 사용자 아이디의 포맷이 일치하는 후보군 리스트를 키로 가지는 dict
     for items in p:
         # check format
         flag=0
@@ -40,5 +40,11 @@ print(solution(["frodo", "fradi", "crodo", "abc123", "frodoc"],["fr*d*", "*rodo"
 
 '''
 <풀이>
-
+1. 불량 사용자 아이디(banned_id)의 후보군이 될 수 있는 유저 아이디(user_id)를 banned_dict에 저장 => 'user_id':['banned_id1','banned_id2']
+2. 후보군이 되는 사용자 아이디를 candidated 집합체에 추가
+3. candidated 집합체에 대해서 순열을 구함
+4. 순열의 각 조합으로 banned_id와 포맷이 같은지 조사 후 같지 않다면 스킵
+5. 4에서 스킵이 되지 않은 경우, 해당 조합을 사전순으로 정렬한 문자열을 key로 check_dict에 추가
+6. 이때, 이미 존재하는 경우 중복이므로 스킵
+7. check_dict의 개수를 반환하고 종료
 '''
