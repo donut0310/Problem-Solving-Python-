@@ -8,14 +8,14 @@ def solution(word, pages):
     externals = defaultdict(list) # 각 url 별 외부링크 정보
     
     for page in pages:
-        url = re.search(r'(<meta property.+content=")(https://.*)"/>', page).group(2) # url 검색
+        url = re.search(r'(<meta property.+content=")(https://.*)"/>', page).group(2) # url 검색, () 그룹핑
         ex_url = re.findall(r'<a href="https://\S*"', page) # 외부 url 검색
         cnt=0
         for w in re.findall(r'[a-z]+',page.lower()):
             if w==word: cnt+=1
         basic_score[url] = cnt # 기본 점수 저장
         [externals[url].append(i[9:-1]) for i in ex_url] # 각 url 별 외부링크 저장
-        
+
     # 링크점수 계산
     link_score = defaultdict(int)
     for url,links in externals.items():
