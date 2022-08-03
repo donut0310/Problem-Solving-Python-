@@ -15,12 +15,12 @@ def search(queue, board, row, col, d):
         nextY,nextX = row+up[i],col
         if 0<=nextY<n and 0<=nextX<n:
             if board[nextY][nextX]==0:
-                if nextY==0: queue.append((nextY,nextX,d+1))
+                if nextY==0: queue.append((nextY,nextX,d+1)) # 컨트롤 도약
                 else:
                     cnt+=1
-                    queue.append((nextY,nextX,d+cnt))
+                    queue.append((nextY,nextX,d+cnt)) # 일반 도약
             else:
-                queue.append((nextY,nextX,d+1))
+                queue.append((nextY,nextX,d+1)) # 일반 도약
                 cnt=0
                 break
 
@@ -87,7 +87,7 @@ def bfs(start_row, start_col, coord1, coord2, board):
         visited2[(row,col)] = (1,d)
         search(queue2, board, row, col, d)
 
-    return distance1 + distance2 + 2
+    return distance1 + distance2 + 2 # 각 카드까지의 거리 + 뒤집기 2회
 
 def solution(board, r, c):
     answer = math.inf
