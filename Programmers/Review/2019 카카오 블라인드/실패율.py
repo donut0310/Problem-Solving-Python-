@@ -18,7 +18,6 @@ def solution(N, stages):
         player -= stage_player
 
     result.sort(key=lambda x:(-x[1], x[0]))
-    print(result)
     [answer.append(i[0]) for i in result]
     return answer
 
