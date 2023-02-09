@@ -28,7 +28,7 @@ def evenForest(t_nodes, t_edges, t_from, t_to):
         
         
     # dfs -> get sum of all child nodes of current node with count 1(current_node)
-    count = dfs(1, 0, graph, graph_cnt)
+    dfs(1, 0, graph, graph_cnt)
         
     # bfs -> check even Tree
     queue = graph[1] # start node
