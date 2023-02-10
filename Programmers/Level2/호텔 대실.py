@@ -12,7 +12,7 @@ def solution(book_time):
         arr[end+10] -= 1
     
     # 구간합
-    for i in range(1, 1001):
+    for i in range(1, 1452):
         arr[i] += arr[i-1]
         answer = max(answer, arr[i])
 
