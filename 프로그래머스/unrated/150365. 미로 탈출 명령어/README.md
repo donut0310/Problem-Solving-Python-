@@ -1,10 +1,10 @@
 # [unrated] 미로 탈출 명령어 - 150365 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/150365#qna) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/150365) 
 
 ### 성능 요약
 
-메모리: 10.1 MB, 시간: 1.60 ms
+메모리: 10.1 MB, 시간: 1.51 ms
 
 ### 구분
 
