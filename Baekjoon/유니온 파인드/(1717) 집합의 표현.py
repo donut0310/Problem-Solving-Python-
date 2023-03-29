@@ -10,7 +10,7 @@ for i in range(n + 1): # 초기 집합
 def find(num):
     if table[num] == num: return num
     p = find(table[num])
-    table[num] = p
+    table[num] = p # 루트 테이블 갱신을 하지 않으면 시간초과,, 갱신 하는게 재귀돌 때 더 빠른듯
     return p
 
 def union(num1, num2):
